@@ -5,6 +5,10 @@ TalkGo读书会笔记（TalkGo 读书会第一期：Linux 性能优化实战 by 
 
 [TalkGo 读书会第一期](https://talkgo.org/t/topic/136)
 
+[Linux性能优化实战——极客专栏](https://time.geekbang.org/column/intro/140)
+
+[启动会slide](https://docs.google.com/presentation/d/16cNCT1aqSsuVA-TPep81NGFlYIM2AO9LPFoZgA1776Y/edit?usp=sharing)
+
 ## 目标
 
 ### 阶段小结：
