@@ -51,7 +51,7 @@ TalkGo读书会笔记（TalkGo 读书会第一期：Linux 性能优化实战 by 
 
 **劣势**：相同的错误重复再犯，相同的状况重复出现。
 
-**更好的方法***：首先理解应用程序和系统的少数几个基本原理，实战，建立起性能全局观，然后掌握一些必要的性能工具。
+**更好的方法**：首先理解应用程序和系统的少数几个基本原理，实战，建立起性能全局观，然后掌握一些必要的性能工具。
 
 ![linux性能工具](../talkgo/asserts/linux_perf_tools_full.png)
 [图片来源](http://www.brendangregg.com/Perf/linux_perf_tools_full.png**
