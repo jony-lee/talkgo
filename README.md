@@ -54,7 +54,7 @@ TalkGo读书会笔记（TalkGo 读书会第一期：Linux 性能优化实战 by 
 **更好的方法**：首先理解应用程序和系统的少数几个基本原理，实战，建立起性能全局观，然后掌握一些必要的性能工具。
 
 ![linux性能工具](../talkgo/asserts/linux_perf_tools_full.png)
-[图片来源](http://www.brendangregg.com/Perf/linux_perf_tools_full.png**
+[图片来源](http://www.brendangregg.com/Perf/linux_perf_tools_full.png)
 
 ## 第1阶段（CPU性能）
 
@@ -62,7 +62,7 @@ TalkGo读书会笔记（TalkGo 读书会第一期：Linux 性能优化实战 by 
 
 ### 基本概念
 1. **平均负载**(uptime工具结果**):单位时间内,可运行或不可中断状态的进程平均数.
-与CPU使用率之间的关系,平均负载既包含了正在使用CPU的进程(这部分计算CPU使用率**,
+与CPU使用率之间的关系,平均负载既包含了正在使用CPU的进程(这部分计算CPU使用率),
 还包括等待CPU进程和等待IO的进程.因此大量等待CPU调度进程和大量等待IO进程会导致
 CPU使用率不高而平均负载特别高.
 
