@@ -45,4 +45,68 @@ TalkGo读书会笔记（TalkGo 读书会第一期：Linux 性能优化实战 by 
 
 >善始善终才是生活的强者。
 
+《[01 | 如何学习Linux性能优化？](https://time.geekbang.org/column/article/69346)》
+
+**一般的解决问题过程**：遇见问题上网查,用别人的方法多试几次就解决了。
+
+**劣势**：相同的错误重复再犯，相同的状况重复出现。
+
+**更好的方法***：首先理解应用程序和系统的少数几个基本原理，实战，建立起性能全局观，然后掌握一些必要的性能工具。
+
+![linux性能工具](../talkgo/asserts/linux_perf_tools_full.png)
+[图片来源](http://www.brendangregg.com/Perf/linux_perf_tools_full.png**
+
+## 第1阶段（CPU性能）
+
+《[02 | 基础篇：到底应该怎么理解“平均负载”？](https://time.geekbang.org/column/article/69618)》
+
+### 基本概念
+1. **平均负载**(uptime工具结果**):单位时间内,可运行或不可中断状态的进程平均数.
+与CPU使用率之间的关系,平均负载既包含了正在使用CPU的进程(这部分计算CPU使用率**,
+还包括等待CPU进程和等待IO的进程.因此大量等待CPU调度进程和大量等待IO进程会导致
+CPU使用率不高而平均负载特别高.
+
+### 问题
+1. 进程状态都有哪些?其中哪部分属于平均负载的计算范畴.
+
+### 实战案例
+
+预先安装 stress 和 sysstat 包，如 apt install stress sysstat。
+
+实时查看负载均衡
+```
+➜  ~ watch -d uptime
+ 16:33:07 up 57 min,  1 user,  load average: 0.89, 0.64, 0.69
+```
+
+实时查看CPU性能
+```
+mpstat -P ALL 5
+```
+实时查看进程性能
+```
+pidstat -u 5 1
+```
+
+**场景一:CPU密集型进程**
+```
+stress --cpu 1 --timeout 600
+```
+**场景二:I/O密集型进程**
+```
+stress -i 1 --timeout 600
+```
+**场景三:大量进程的场景**
+```
+stress -c 8 --timeout 600
+```
+
+### 工具使用
+**stress**:系统压测工具,模拟不同系统场景
+
+**mpstat**:多核CPU性能分析工具,查看实时的或平均的CPU性能指标.(面向CPU)
+
+**pidstat**:实时查看进程的CPU,内存,I/O及上下文切换等性能指标.(面向进程)
+
 完。
+
