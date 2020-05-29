@@ -1,9 +1,9 @@
 # talkgo
 TalkGo读书会笔记（TalkGo 读书会第一期：Linux 性能优化实战 by 倪朋飞）
 
-《[项目文档——石墨文档](https://shimo.im/sheets/1lq7MgXnBphdeWAe/MODOC)》
+[项目文档——石墨文档](https://shimo.im/sheets/1lq7MgXnBphdeWAe/MODOC)
 
-[TalkGo 读书会第一期](https://talkgo.org/t/topic/136)
+[TalkGo 读书会第一期——帖子](https://talkgo.org/t/topic/136)
 
 [Linux性能优化实战——极客专栏](https://time.geekbang.org/column/intro/140)
 
@@ -57,7 +57,7 @@ TalkGo读书会笔记（TalkGo 读书会第一期：Linux 性能优化实战 by 
 
 **更好的方法**：首先理解应用程序和系统的少数几个基本原理，实战，建立起性能全局观，然后掌握一些必要的性能工具。
 
-![linux性能工具](../talkgo/asserts/linux_perf_tools_full.png)
+![linux性能工具](./asserts/linux_perf_tools_full.png)
 [图片来源](http://www.brendangregg.com/Perf/linux_perf_tools_full.png)
 
 # 第1阶段（CPU性能）
@@ -142,6 +142,7 @@ stress -c 8 --timeout 600
 同一进程下的线程由于虚拟内存和全局变量资源共享，这部分其实不用切换，其他的比如线程自己的私有数据或者寄存器程序计数器这些都需要切换。
 
 **场景三：中断上下文切换**
+
 对同一个 CPU 来说，中断处理比进程拥有更高的优先级。
 
 ### 问题延伸
@@ -187,6 +188,52 @@ watch -d cat /proc/interrupts
 
 ### 简单小结
 总而言之,上下文切换以及系统中断的时间相当于操作系统在划水的时间,我们要通过以上手段找出来系统在什么时候划水不干正事,并期望减小这些划水的时间,让CPU尽可能多的去干正事.
+
+## 《[05 | 基础篇：某个应用的CPU使用率居然达到100%，我该怎么办？](https://time.geekbang.org/column/article/70476)》
+
+### 关键概念
+1. CPU使用率及CPU使用率的计算:就是除了空闲时间外的其他时间占总 CPU 时间的百分比.注意不同工具对CPU使用率计算所使用的时间尺度,有的是整个周期,有的是3s.
+![cpu使用率](./asserts/cpu_use.png)
+
+### 应用实战
+
+### 问题延伸
+
+### 工具使用
+
+1. perf top:它能够实时显示占用 CPU 时钟最多的函数或者指令，因此可以用来查找热点函数.
+2. perf record/perf report:前者提供离线的记录方式,后者将前者的数据以perf top的方式呈现.
+3. ab:一款http性能测试工具
+
+
+## 《[06 | 案例篇：系统的 CPU 使用率很高，但为啥却找不到高 CPU 的应用？](https://time.geekbang.org/column/article/70822)》
+
+当你发现系统的 CPU 使用率很高的时候，不一定能找到相对应的高 CPU 使用率的进程。
+
+这种场景出现的情况为
+1. 第一个原因，进程在不停地崩溃重启，比如因为段错误、配置错误等等，这时，进程在退出后可能又被监控系统自动重启了。
+2. 第二个原因，这些进程都是短时进程，也就是在其他应用内部通过 exec 调用的外面命令。这些命令一般都只运行很短的时间就会结束，你很难用 top 这种间隔时间比较长的工具发现（上面的案例，我们碰巧发现了）。
+
+
+### 工具使用
+1. execsnoop: 就是一个专为短时进程设计的工具。它通过 ftrace 实时监控进程的 exec() 行为，并输出短时进程的基本信息，包括进程 PID、父进程 PID、命令行参数以及执行的结果。
+2. pstress:
+
+
+如何针对这种情况进行分析
+1. 应用里直接调用了其他二进制程序，这些程序通常运行时间比较短，通过 top 等工具也不容易发现。
+2. 应用本身在不停地崩溃重启，而启动过程的资源初始化，很可能会占用相当多的 CPU。
+
+
+
+
+
+
+
+
+
+
+
 
 完。
 
